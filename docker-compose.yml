@@ -2,13 +2,13 @@ version: '3'
 
 services:
   javaapp:
-    image: mixaverross88/dockerize_java_mysql_example_project
+    image: dhl-alpine-tomcat-java-app/dhl-java-rest
     ports:
-      - 80:8080
+      - 8084:8080
     networks:
       - isolated
   mysqlapp:
-    image: mixaverross88/dockerize_java_mysql_example_project_mysql
+    image: dhl-alpine-tomcat-java-app/dhl-mysql
     environment:
       - MYSQL_ROOT_PASSWORD=supersecret 
     ports:
