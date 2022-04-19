@@ -1,13 +1,12 @@
-# Stage 1: download the code of github
+# Etap 1: załadowanie kodu zrodlowego z gitHUB -a 
 FROM alpine/git as downloadSourceCode
 WORKDIR /app
-RUN git clone https://github.com/mixaverros88/docker-with-java-and-mysql
+RUN git clone https://github.com/adalbertii/dhl-alpine-tomcat-java-mysql.git
 
-# Stage 2: spin up a mysql container
+# Etap 2: utworzenie kontenera  mysql (załadowanie obrazu a DockerHub a i jego zainicjowanie) 
 FROM mysql
-# Add a database
+# ustawienie bazy 
 ENV MYSQL_DATABASE company
-# Add the content of the sql-scripts/ directory to your image
-# All scripts in docker-entrypoint-initdb.d/ are automatically
-# executed during container startup
+# dodanie skryptow (katalogu sql-scripts) tworzacych zawartosc schammtu bazy "company" do obrazu 
+# skrypty  automatycznie uruchamiane podczas startupu kontenera (All scripts in docker-entrypoint-initdb.d/)
 COPY --from=downloadSourceCode /app/docker-with-java-and-mysql/mysql/sql-scripts/ /docker-entrypoint-initdb.d/
